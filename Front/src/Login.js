@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 // import { db } from '../../Back/models/User';
-
+import { KAKAO_AUTH_URL } from './oAuth';
 const {Kakao} = window;
 
 function Login(props) {
@@ -13,13 +13,14 @@ function Login(props) {
     const [email, setEmail] = useState("default email")
     const [profileImage, setProfileImage] = useState("default profile img")
     const [accessToken, setAccessToken] = useState("default token")
-    const [userInfo, setUserInfo] = useState({
-        email:'',
-        profileImage:'',
-        accessToken:'',
-        __v:'',
-        _id:''
-    })
+    // const [userInfo, setUserInfo] = useState({
+    //     email:'',
+    //     profileImage:'',
+    //     accessToken:'',
+    //     __v:'',
+    //     _id:''
+    // })
+    const [userInfo, setUserInfo] = useState([]);
 
     function LoginClickHandler(){
         try {
@@ -45,7 +46,8 @@ function Login(props) {
                                 sendKakao(email, profileImage, accessToken);
                             }  
                         })
-                        // props.history.push({
+                        // register로 갈때 userInfo 라는 배열을 들고 가고 싶은데 어떻게 해야되는지 모르겠어
+                        // props.history.push({ 
                         //     pathname:'/register',
                         //     state: {
                         //         detail: userInfo
@@ -73,18 +75,16 @@ function Login(props) {
             profileImage: profileImage,
             accessToken: accessToken
         })
-        setUserInfo(response.data);
-        
-        console.log(userInfo);
-
-        console.log(response.data);
+        setUserInfo(response.data); // 이 데이터 배열을 userInfo 에 저장하고 싶음. 아직 제대로 값안들어가짐
+        console.log(userInfo)
     }
 
     return ( 
         <div className = "container" >
-        <div className = "logo" > 원터디 로고 </div> 
-        <button className = "loginButton" onClick = {LoginClickHandler} > 카카오로그인 </button> 
+            <div className = "logo" > 원터디 로고 </div> 
+            <button className = "loginButton" onClick = {LoginClickHandler} > 카카오로그인 </button> 
         </div>
+        
     )
 }
 
