@@ -1,10 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
-// import '../css/login.css'
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-// import { db } from '../../Back/models/User';
-import { KAKAO_AUTH_URL } from './oAuth';
 const {Kakao} = window;
 
 function Login(props) {
@@ -13,14 +10,11 @@ function Login(props) {
     const [email, setEmail] = useState("default email")
     const [profileImage, setProfileImage] = useState("default profile img")
     const [accessToken, setAccessToken] = useState("default token")
-    // const [userInfo, setUserInfo] = useState({
-    //     email:'',
-    //     profileImage:'',
-    //     accessToken:'',
-    //     __v:'',
-    //     _id:''
-    // })
-    const [userInfo, setUserInfo] = useState([]);
+    const [userInfo, setUserInfo] = useState({
+        email:'',
+        profileImage:'',
+        accessToken:''
+    })
 
     function LoginClickHandler(){
         try {
@@ -33,6 +27,12 @@ function Login(props) {
                         console.log('로그인 성공', auth);
                         const authData = auth;
 
+                        /* 동일한 토큰이 오는지 확인 
+                        if(Kakao.Auth.getAccessToken){
+                            console.log(Kakao.Auth.getAccessToken());
+                        }                        
+                        */
+                       
                         setIsLogin(true);
                         window.Kakao.API.request({
                             url:'/v2/user/me',
@@ -46,13 +46,6 @@ function Login(props) {
                                 sendKakao(email, profileImage, accessToken);
                             }  
                         })
-                        // register로 갈때 userInfo 라는 배열을 들고 가고 싶은데 어떻게 해야되는지 모르겠어
-                        // props.history.push({ 
-                        //     pathname:'/register',
-                        //     state: {
-                        //         detail: userInfo
-                        //     }
-                        // });
                     },
 
                     fail: (err) => {
@@ -70,12 +63,20 @@ function Login(props) {
         setProfileImage(profileImage);
         setAccessToken(accessToken);
 
+        userInfo.email = email;
+        userInfo.profileImage = profileImage;
+        userInfo.accessToken = accessToken;
+
+        props.history.push({
+            pathname: "/register",
+            state: {userInfo: userInfo}
+        });
+
         const response = await axios.post('http://13.209.66.117:8080/auth/kakao',{
             email: email,
             profileImage: profileImage,
             accessToken: accessToken
         })
-        setUserInfo(response.data); // 이 데이터 배열을 userInfo 에 저장하고 싶음. 아직 제대로 값안들어가짐
         console.log(userInfo)
     }
 
