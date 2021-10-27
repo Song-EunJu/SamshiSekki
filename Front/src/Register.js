@@ -8,7 +8,7 @@ function Register() {
     const userInfo = location.state.userInfo; //login에서 받아온 유저 정보
     const [newNickName, setNewNickName] = useState('');
 
-    // console.log(userInfo); //유저정보 출력 테스트
+    console.log(userInfo); //유저정보 출력 테스트
 
     function nickChange(e){
         setNewNickName(e.target.value);
@@ -17,7 +17,8 @@ function Register() {
     const submitClickHandler = async() => {
         console.log(newNickName);
 
-        const response = await axios.post('',{
+        const response = await axios.post('http://localhost:8080/auth/nickname',{
+            email: userInfo.email,
             nickName: newNickName
         });
 
@@ -28,7 +29,8 @@ function Register() {
         <div className = "container" >
         <div className = "logo" > 원터디 로고 </div> 
         <div>
-            {/* {props.location.state.detail.email} */}
+            {userInfo.email}
+            {/* <img src={require(userInfo.email)}></img> */}
         </div>
         <input type="text" placeholder="닉네임" className="inputNick" onChange={nickChange}></input>
         <button className="submitBtn" onClick={submitClickHandler}>저장</button>

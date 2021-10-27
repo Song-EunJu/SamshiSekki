@@ -13,9 +13,14 @@ const userSchema = new Schema({
     accessToken:{
         type:String,
         require:true
+    },
+    nickname:{
+        type:String,
+        maxlength:8
     }
 })
 
 module.exports = mongoose.model('User', userSchema);
 
 
+    

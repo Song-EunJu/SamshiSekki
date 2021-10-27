@@ -67,17 +67,25 @@ function Login(props) {
         userInfo.profileImage = profileImage;
         userInfo.accessToken = accessToken;
 
-        props.history.push({
-            pathname: "/register",
-            state: {userInfo: userInfo}
-        });
-
-        const response = await axios.post('http://13.209.66.117:8080/auth/kakao',{
+        const response = await axios.post('http://localhost:8080/auth/kakao',{
             email: email,
             profileImage: profileImage,
-            accessToken: accessToken
+            accessToken: accessToken,
+            nickname: ""
         })
-        console.log(userInfo)
+        
+        console.log("login console");
+        console.log(response);
+        if(response.data.nickname===""){
+            props.history.push({
+                pathname: "/register",
+                state: {userInfo: userInfo}
+            });
+        }
+        else{
+            console.log("main");
+        }
+        
     }
 
     return ( 
