@@ -64,30 +64,37 @@ function Login(props) {
         setProfileImage(profileImage);
         setAccessToken(accessToken);
 
-        const response = await axios.post('http://localhost:8080/auth/kakao',{
+        const response = await axios.post('http://13.209.66.117:8080/auth/kakao',{
             email: email,
             profileImage: profileImage,
             accessToken: accessToken
         })
-        
-        // register 에 넘어갈 user 정보
+
+        //register 에 넘어갈 user 정보
         userInfo.email = response.data.email;
         userInfo.profileImage = response.data.profileImage;
         userInfo.accessToken = response.data.accessToken;
         userInfo.nickname = response.data.nickname;
+        // setEmail(response.data.email);
 
         console.log("login console");
         console.log(response);
 
-        if(response.data.nickname==""){ // 닉네임이 없는 경우
-            props.history.push({
+        if(response.data.nickname===""){ // 닉네임이 없는 경우
+            props.history.push({ // 닉네임 등록 화면으로
                 pathname: "/register",
                 state: {userInfo: userInfo}
+                // state: {email : email}
+
             });
         }
         else{ // 닉네임 있는 경우 메인 화면으로 
             console.log("main");
-            /* 메인으로 넘어가는 코드 필요 */
+
+            /* 메인으로 넘어가는 코드 필요 
+                메인으로 넘어갈 때도 userInfo 들고가야함 
+                userInfo 에서 nickname 값 출력하는 거까지 확인부탁합니당
+            */
         }
     }
 

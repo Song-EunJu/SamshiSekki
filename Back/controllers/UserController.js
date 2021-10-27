@@ -73,6 +73,4 @@ exports.saveNickname = async function (req, res) {
             .status(500)
             .json({ error: err });
     } 
-
-
 }
