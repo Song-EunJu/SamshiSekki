@@ -64,7 +64,7 @@ function Login(props) {
         setProfileImage(profileImage);
         setAccessToken(accessToken);
 
-        const response = await axios.post('http://13.209.66.117:8080/auth/kakao',{
+        const response = await axios.post('http://localhost:8080/auth/kakao',{
             email: email,
             profileImage: profileImage,
             accessToken: accessToken
@@ -95,6 +95,11 @@ function Login(props) {
                 메인으로 넘어갈 때도 userInfo 들고가야함 
                 userInfo 에서 nickname 값 출력하는 거까지 확인부탁합니당
             */
+            props.history.push({
+                pathname: "/main",
+                state: {userInfo: userInfo}
+            }); 
+
         }
     }
 

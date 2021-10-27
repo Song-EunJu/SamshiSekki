@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { withRouter, useLocation } from 'react-router';
 import axios from 'axios';
 
-function Register() {
+function Register(props) {
     const location = useLocation();
     const userInfo = location.state.userInfo; //login에서 받아온 유저 정보
     const [newNickName, setNewNickName] = useState('');
@@ -15,7 +15,7 @@ function Register() {
     }
 
     const submitClickHandler = async() => {
-        const response = await axios.post('http://13.209.66.117:8080/auth/nickname',{
+        const response = await axios.post('http://localhost:8080/auth/nickname',{
             email: userInfo.email,
             nickName: newNickName
         });
@@ -26,7 +26,10 @@ function Register() {
             메인으로 넘어갈 때도 userInfo 들고가야함 
             userInfo 에서 nickname 값 출력하는 거까지 확인부탁합니당
         */
-
+        props.history.push({
+            pathname: "/main",
+            state: {userInfo: userInfo}
+        });
     }
 
     return (
