@@ -15,14 +15,14 @@ function Register() {
     }
 
     const submitClickHandler = async() => {
-        console.log(newNickName);
-
-        const response = await axios.post('http://localhost:3000/auth/nickname',{
+        const response = await axios.post('http://localhost:8080/auth/nickname',{
             email: userInfo.email,
             nickName: newNickName
         });
+        console.log(response.data.nickname);   
+        
+        /* 메인으로 넘어가는 코드 필요 */
 
-        console.log(response.data);
     }
 
     return (
@@ -30,7 +30,6 @@ function Register() {
         <div className = "logo" > 원터디 로고 </div> 
         <div>
             {userInfo.email}
-            {/* <img src={require(userInfo.email)}></img> */}
         </div>
         <input type="text" placeholder="닉네임" className="inputNick" onChange={nickChange}></input>
         <button className="submitBtn" onClick={submitClickHandler}>저장</button>

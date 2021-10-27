@@ -13,7 +13,8 @@ function Login(props) {
     const [userInfo, setUserInfo] = useState({
         email:'',
         profileImage:'',
-        accessToken:''
+        accessToken:'',
+        nickname:''
     })
 
     function LoginClickHandler(){
@@ -73,17 +74,20 @@ function Login(props) {
         userInfo.email = response.data.email;
         userInfo.profileImage = response.data.profileImage;
         userInfo.accessToken = response.data.accessToken;
+        userInfo.nickname = response.data.nickname;
 
         console.log("login console");
         console.log(response);
+
         if(response.data.nickname==""){ // 닉네임이 없는 경우
             props.history.push({
                 pathname: "/register",
                 state: {userInfo: userInfo}
             });
         }
-        else{
+        else{ // 닉네임 있는 경우 메인 화면으로 
             console.log("main");
+            /* 메인으로 넘어가는 코드 필요 */
         }
     }
 
