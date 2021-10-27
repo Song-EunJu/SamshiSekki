@@ -3,32 +3,34 @@ const path=require('path');
 
 exports.saveUser = async function (req, res) {
     const { email, profileImage, accessToken } = req.body;
+    const nickname="";
+    
+    // 1. 등록된 유저인지 확인 / 토큰 교체 
+    try{
+        await User.find({ email: email }, (err, users) => {
+            console.log("find");
+            console.log(users.length);
+            if(users.length!=0){ // 이미 등록되어 있으면 토큰 교체 후 해당 유저 정보를 갖고 메인으로 이동
+                console.log("update before");
+                User.updateOne({email: email}, {accessToken: accessToken});  // 토큰 교체해주는 코드 
 
-    // 로그인 시 이미 등록된 유저인지 확인하고 토큰 교체 ( 토큰 교체는 처리 해줘야 함)
-    User.find({ email: email }, (err, users) => {
-        cpnsole.log("find");
-        console.log(users.data.length);
-
-        if(err)
-            return res
-                .status(500)
-                .json({ error: err });
-        else if(users.data.length!=0){ // 이미 등록되어 있으면 해당 유저 정보를 갖고 메인으로 이동
-            // 토큰 교체해주는 코드 
-
-            User.updateOne({email: email}, {accessToken: accessToken});
-            
-            return res
-                .status(200)
-                .json(users);
-        }    
-    });
+                return res
+                    .status(200)
+                    .json(users[0]);
+            } // 등록된 유저가 아닌 경우
+        });
+    } catch (err) {
+        return res
+            .status(500)
+            .json({ error: err });
+    }
 
     // 등록된 유저가 아닌경우
     const user = new User({
         email,
         profileImage,
-        accessToken
+        accessToken,
+        nickname
     });
     console.log("hi")
     console.log(user)

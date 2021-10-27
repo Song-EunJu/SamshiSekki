@@ -42,7 +42,7 @@ function Login(props) {
                                 const email = kakao_account.email;
                                 const profileImage = kakao_account.profile.profile_image_url;
                                 const accessToken = authData.access_token;
-                                
+
                                 sendKakao(email, profileImage, accessToken);
                             }  
                         })
@@ -63,20 +63,20 @@ function Login(props) {
         setProfileImage(profileImage);
         setAccessToken(accessToken);
 
-        userInfo.email = email;
-        userInfo.profileImage = profileImage;
-        userInfo.accessToken = accessToken;
-
         const response = await axios.post('http://localhost:8080/auth/kakao',{
             email: email,
             profileImage: profileImage,
-            accessToken: accessToken,
-            nickname: ""
+            accessToken: accessToken
         })
         
+        // register 에 넘어갈 user 정보
+        userInfo.email = response.data.email;
+        userInfo.profileImage = response.data.profileImage;
+        userInfo.accessToken = response.data.accessToken;
+
         console.log("login console");
         console.log(response);
-        if(response.data.nickname===""){
+        if(response.data.nickname==""){ // 닉네임이 없는 경우
             props.history.push({
                 pathname: "/register",
                 state: {userInfo: userInfo}
@@ -85,7 +85,6 @@ function Login(props) {
         else{
             console.log("main");
         }
-        
     }
 
     return ( 
