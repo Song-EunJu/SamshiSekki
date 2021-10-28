@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import '../css/login.css';
 const {Kakao} = window;
 
 function Login(props) {
@@ -80,7 +81,7 @@ function Login(props) {
         console.log("login console");
         console.log(response);
 
-        if(response.data.nickname===""){ // 닉네임이 없는 경우
+        if(response.data.nickname===''){ // 닉네임이 없는 경우
             props.history.push({ // 닉네임 등록 화면으로
                 pathname: "/register",
                 state: {userInfo: userInfo}
@@ -89,7 +90,7 @@ function Login(props) {
             });
         }
         else{ // 닉네임 있는 경우 메인 화면으로 
-            console.log("main");
+            //console.log("main");
 
             /* 메인으로 넘어가는 코드 필요 
                 메인으로 넘어갈 때도 userInfo 들고가야함 
@@ -98,8 +99,8 @@ function Login(props) {
             props.history.push({
                 pathname: "/main",
                 state: {userInfo: userInfo}
-            }); 
-
+            });
+            
         }
     }
 

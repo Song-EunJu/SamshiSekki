@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
+import '../css/register.css';
 import { withRouter, useLocation } from 'react-router';
 import axios from 'axios';
+import '../css/register.css';
 
 function Register(props) {
     const location = useLocation();
@@ -26,10 +28,12 @@ function Register(props) {
             메인으로 넘어갈 때도 userInfo 들고가야함 
             userInfo 에서 nickname 값 출력하는 거까지 확인부탁합니당
         */
+
         props.history.push({
             pathname: "/main",
             state: {userInfo: userInfo}
         });
+
     }
 
     return (

@@ -1,11 +1,8 @@
 import React from 'react';
-import Login from './Login';
-import Register from './Register';
-import LandingPage from './LandingPage';
-
+import LandingPage from './pages/LandingPage/LandingPage';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import {Link, Route, Switch} from 'react-router-dom';
-
-// import LandingPage from './pages/LandingPage/LandingPage'
 
 function App() {
   return (
@@ -19,7 +16,7 @@ function App() {
       </Route>
 
       <Route path='/main'>
-        <LandingPage />
+        <LandingPage/>
       </Route>
     </div>
   );

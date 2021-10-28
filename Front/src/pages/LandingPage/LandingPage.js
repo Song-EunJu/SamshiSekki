@@ -6,9 +6,9 @@ function LandingPage() {
     const userInfo = location.state.userInfo;
     return ( <>
         <p> hi it 's samshisekki</p>
-        <p>{userInfo.nickname}</p>
+        <p>{userInfo.email}</p>
         </>
     );
 }
 
-export default withRouter(LandingPage);
+export default LandingPage;
