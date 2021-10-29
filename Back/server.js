@@ -30,6 +30,6 @@ app.get('/', function(req, res){
 const authRouter = require('./routes/auth');
 app.use('/auth', authRouter);
 
-const studyRouter = require('./routes/study');
-app.use('/study', studyRouter);
+// const studyRouter = require('./routes/study');
+// app.use('/study', studyRouter);
 
