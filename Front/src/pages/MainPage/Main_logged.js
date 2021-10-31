@@ -9,7 +9,7 @@ function MainPageLogged(props) {
     let history = useHistory();
     let location = useLocation();
     const userInfo = location.state.userInfo;
-
+    console.log(userInfo);
     return (
         <>
             <Navbar userInfo={userInfo}/>

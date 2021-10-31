@@ -15,7 +15,8 @@ function Login(props) {
         email:'',
         profileImage:'',
         accessToken:'',
-        nickname:''
+        nickname:'',
+        userId:''
     })
 
     function LoginClickHandler(){
@@ -76,17 +77,17 @@ function Login(props) {
         userInfo.profileImage = response.data.profileImage;
         userInfo.accessToken = response.data.accessToken;
         userInfo.nickname = response.data.nickname;
-        // setEmail(response.data.email);
+        userInfo.userId=response.data.userId;
 
         console.log("login console");
         console.log(response);
+        console.log(userInfo);
 
         if(response.data.nickname===''){ // 닉네임이 없는 경우
             props.history.push({ // 닉네임 등록 화면으로
                 pathname: "/register",
                 state: {userInfo: userInfo}
                 // state: {email : email}
-
             });
         }
         else{ // 닉네임 있는 경우 메인 화면으로 

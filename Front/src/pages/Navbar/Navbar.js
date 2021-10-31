@@ -62,6 +62,13 @@ function LoggedIn(props){
         });
     }
 
+    function MyPageClickHandler(){
+        history.push({
+            pathname: "/mypage",
+            state: {userInfo: props.userInfo}
+        });
+    }
+
     return(
         <div className="navbar">
         <div className="logo" onClick={logoClickHandler}>wantudy</div>
@@ -70,6 +77,7 @@ function LoggedIn(props){
         <div className="apply">스터디 신청서 등록</div>
         <div className="nickname">안녕, {props.userInfo.nickname}</div>
         <div className="logout" onClick={LogoutClickHandler}>로그아웃</div>
+        <div className="logout" onClick={MyPageClickHandler}>마이페이지</div>
         </div>
     )
 }

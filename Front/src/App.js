@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Mainpage from './pages/MainPage/MainPage';
 import {Link, Route, Switch} from 'react-router-dom';
 import MainPageLogged from './pages/MainPage/Main_logged';
+import Mypage from './pages/Mypage';
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -33,6 +34,10 @@ function App() {
 
       <Route path='/main_logged'>
         <MainPageLogged/>
+      </Route>
+
+      <Route path='/mypage'>
+        <Mypage />
       </Route>
     </div>
   );
