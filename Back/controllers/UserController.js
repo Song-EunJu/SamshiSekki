@@ -1,56 +1,37 @@
-const StudyList = require('../models/StudyModel');
-const path = require('path');
+const User = require("../models/User");
 
-// 마이페이지 띄우기 (내정보에 해당하는 거를 띄워야 되는데..)
-// exports.showMypage = function (req, res) {
-//     const { email, profileImage, accessToken } = req.body;
-//     const nickname="";
-    
-//     // 1. 등록된 유저인지 확인 / 토큰 교체 
-    
-//     try{
-//         let user = await User.findOne({ email: email });
-//         // 이미 등록되어 있으면 토큰 교체 후 해당 유저 정보를 갖고 메인으로 이동
-//         if(user){
-//             console.log("update before");
-//             const updateUser = await User.updateOne({email: email}, {accessToken: accessToken});  // 토큰 교체해주는 코드
-//             console.log(updateUser);
-//             user = await User.findOne({ email: email }); // 새로 업데이트된 유저 정보를 넘겨줌
-//             console.log(user);        
-//             return res
-//                 .status(200)
-//                 .json(user); 
-    
-//         }    
-//     } catch (err) {
-//         return res
-//             .status(500)
-//             .json({ error: err });
-//     } 
+/* 마이페이지 화면 controller */ 
 
-//     // 2. 유저가 등록되어있지 않으면
-//     const user = new User({
-//         email,
-//         profileImage,
-//         accessToken,
-//         nickname
-//     });
-//     console.log("hi")
-//     console.log(user)
+// 마이페이지에서 회원정보(닉네임) 수정
+exports.editNickname = async function (req, res) {
+    const { userId, nickName } = req.body;
+    console.log(userId);
+    try{
+        let user = await User.findOne({ userId : userId }); // 유저번호에 해당하는 유저 있는지 찾고
 
-//     try {
-//         await user.save(); // 등록되어있지 않은 유저인 경우 저장하고 닉네임 페이지로 이동
-//         console.log("save")
-//         return res
-//             .status(200)
-//             .json(user) // 새로운 유저를 등록
-//     } catch (err){
-//         console.log("catch")
-//         return res
-//             .status(500)
-//             .json({ error: err });
-//     } 
-// }
+        if(user){
+            // 바꾸려는 닉네임이 중복된지 확인
+            let alreadyUsed = await User.findOne({ nickname: nickName }); 
+            if(alreadyUsed){ 
+                return res
+                    .status(409)  
+                    .json({ error : '이미 사용 중인 닉네임입니다. '})
+            }
+
+            const editNickname = await User.updateOne({userId:userId}, {nickname: nickName}); 
+            console.log(editNickname);
+            user = await User.findOne({ userId : userId }); // 새로 업데이트된 유저 정보를 넘겨줌
+            console.log(user);        
+            return res
+                .status(200)
+                .json(user); 
+        }    
+    } catch (err) {
+        return res
+            .status(500)
+            .json({ error: err });
+    }
+}
 
 
 

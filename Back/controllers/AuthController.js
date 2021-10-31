@@ -1,5 +1,6 @@
 const User = require("../models/User");
-const path=require('path');
+
+/* 처음 카카오 로그인 + 닉네임 수정 */ 
 
 exports.saveUser = async function (req, res) {
     const { email, profileImage, accessToken } = req.body;

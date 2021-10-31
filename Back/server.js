@@ -54,3 +54,6 @@ app.get('/',function(req,res){
 // router 사용
 const authRouter = require('./routes/auth');
 app.use('/auth', authRouter);
+
+const userRouter = require('./routes/users');
+app.use('/users', userRouter);

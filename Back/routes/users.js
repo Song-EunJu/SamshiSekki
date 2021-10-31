@@ -1,9 +1,9 @@
-// const express = require('express');
-// const router = express.Router();
-// const UserController = require('../controllers/UserController')
+const express = require('express');
+const router = express.Router();
+const UserController = require('../controllers/UserController')
 
-// // 마이페이지조회
-// router.get('/:userId', UserController.showMypage)
+// 닉네임 수정
+router.post('/:userId/profile', UserController.editNickname)
  
 // // 회원정보 수정
 // router.get('/:userId/profile', UserController.editUser)
@@ -24,6 +24,4 @@
 // router.get('/:userId/opened-studylist', UserController.editUser)
 
 
-
-
-// module.exports = router;
+module.exports = router;
