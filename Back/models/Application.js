@@ -14,6 +14,10 @@ const applicationSchema = new Schema({
     applicationName:{ // 값이 없으면 띄워줄 때 신청서1,2..이런식으로 가게
         type:String,
     },
+    createdAt: { 
+        type: Date, 
+        required: true 
+    },
     name:{
         type:String,
     },

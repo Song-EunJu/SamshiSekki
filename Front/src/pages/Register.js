@@ -21,7 +21,6 @@ function Register(props) {
             email: userInfo.email,
             nickName: newNickName
         });
-        console.log(response);
         console.log(response.data.nickname);   
         userInfo.nickname = newNickName; // login 에서 받아온 userInfo에는 nickname 값이 공백이기 때문에, 닉네임 입력 후에는 다시 초기화해줘야함
 

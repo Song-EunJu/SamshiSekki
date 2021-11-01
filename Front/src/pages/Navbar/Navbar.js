@@ -61,7 +61,6 @@ function LoggedIn(props){
             state: {userInfo: props.userInfo}
         });
     }
-
     function MyPageClickHandler(){
         history.push({
             pathname: "/mypage",
@@ -78,6 +77,7 @@ function LoggedIn(props){
         <div className="nickname">안녕, {props.userInfo.nickname}</div>
         <div className="logout" onClick={LogoutClickHandler}>로그아웃</div>
         <div className="logout" onClick={MyPageClickHandler}>마이페이지</div>
+
         </div>
     )
 }
