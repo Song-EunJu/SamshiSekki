@@ -1,6 +1,6 @@
 const User = require("../models/User");
 
-/* 처음 카카오 로그인 + 닉네임 수정 */ 
+/* 처음 카카오 로그인 + 닉네임 등록 */ 
 
 exports.saveUser = async function (req, res) {
     const { email, profileImage, accessToken } = req.body;

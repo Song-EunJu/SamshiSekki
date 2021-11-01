@@ -3,7 +3,12 @@ const router = express.Router();
 const ApplicationController = require('../controllers/ApplicationController')
 
 // router.get('/application', ApplicationController.createApplication)
-// router.post('/application', ApplicationController.saveApplication)
+
+// 스터디 신청서 수정
+router.post('/application/:applicationId', ApplicationController.saveApplication)
+
+
+
 
 const StudyController = require('../controllers/StudyController')
 

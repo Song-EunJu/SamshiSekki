@@ -18,7 +18,6 @@ function Mypage(props) {
 
     const submitClickHandler = async() => {
         const response = await axios.post(`http://localhost:8080/users/${userInfo.userId}/profile`,{
-            userId:userInfo.userId,
             nickName: newNickName
         });
 
