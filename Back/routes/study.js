@@ -7,10 +7,17 @@ const ApplicationController = require('../controllers/ApplicationController')
 router.post('/application', ApplicationController.saveApplication)
 
 // 스터디 신청서 수정
-router.post('/application/:applicationId', ApplicationController.saveApplication)
+router.put('/application/:applicationId', ApplicationController.saveApplication)
 
 // 스터디 신청서 조회
 router.get('/application', ApplicationController.showApplication)
+
+// 스터디 신청서 삭제
+router.delete('/application', ApplicationController.deleteApplication)
+
+// 스터디 신청서 상세 보기
+router.get('/application/:applicationId', ApplicationController.detailApplication)
+
 
 
 const StudyController = require('../controllers/StudyController')
