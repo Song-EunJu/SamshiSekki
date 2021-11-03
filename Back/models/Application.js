@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-// applicationId - autoIncrement 
 var autoIncrement = require('mongoose-auto-increment');
 
 const applicationSchema = new Schema({

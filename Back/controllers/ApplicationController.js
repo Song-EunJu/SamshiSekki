@@ -1,7 +1,4 @@
 const Application = require("../models/Application");
-// const path=require('path');
-
-
 /* 
     1) 상단바에서 지원서 등록하기 - 조회, 작성, (수정, 삭제)
     2) 스터디 신청버튼 눌렀을 때 지원서 등록하기 - 수정, 조회, 작성, 신청(등록), 삭제 
@@ -25,11 +22,11 @@ exports.showApplication = async function (req, res) {
         const Applications = await Application.find(userId) 
             .sort({ applicationId : -1}) // 내림차순 정렬
             .limit(3)
-            .skip((page - 1) * 3)
+            .skip((page - 1) * 5)
             .exec();
 
         const count = await Applications.countDocuments().exec();
-        res.set('Last-Page', Math.ceil(count / 3)); // 응답헤더를 설정 res.set(name, value)
+        res.set('Last-Page', Math.ceil(count / 5 )); // 응답헤더를 설정 res.set(name, value)
         return res
             .status(200)
             .json(Applications);
