@@ -7,7 +7,11 @@ const applicationSchema = new Schema({
     userId:{ // 누가 신청서를 작성했는지
         type:Number,
     },
-    applicationId:{ // 신청서 수정할 때 
+    applicationId:{ // 신청서 번호 auto increment
+        type:Number,
+        default:0
+    },
+    studyId:{ // 스터디에 등록하는 경우 이 값이 바뀜. 아니면 default=0 값 유지
         type:Number,
         default:0
     },

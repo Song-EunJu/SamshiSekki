@@ -9,6 +9,9 @@ router.get('/application', ApplicationController.showApplication)
 // 스터디 지원서 작성
 router.post('/application', ApplicationController.saveApplication)
 
+// 스터디 지원서 등록
+router.post(':studyId/application', ApplicationController.registerApplication)
+
 // 스터디 지원서 상세 보기
 router.get('/application/:applicationId', ApplicationController.detailApplication)
 

@@ -24,7 +24,7 @@ exports.showApplication = async function (req, res) {
     try {
         const Applications = await Application.find(userId) 
             .sort({ applicationId : -1}) // 내림차순 정렬
-            .limit(5)
+            .limit(3)
             .skip((page - 1) * 3)
             .exec();
 
@@ -96,7 +96,35 @@ exports.detailApplication = async function (req, res) {
     }
 }
 
-// 1 - 스터디 신청 시에 지원서 등록하기 /study/{studyId}/application
+// 2 - 스터디 신청 시에 지원서 등록하기 /study/{studyId}/application/
+exports.registerApplication = async function (req, res) {
+    const { studyId } = req.params;
+    const { applicationId } = req.body;
+    
+    try {
+        const application = await Application.findOneAndUpdate(applicationId,{
+            $set: {
+                applicationId:applicationId
+            }
+        },{new: true}).exec();
+        
+        console.log(application.applicationId);
+        if(!application)
+            return res
+                .status(404)
+                .end();
+        else 
+            return res
+                .status(200)
+                .json(application)
+        
+    } catch (err) {
+        throw res
+            .status(500)
+            .json({ error: err })
+    }
+}
+
 
 // 2 - 지원서 수정 (저장 / 다른 이름으로 저장)
 exports.updateApplication = async function (req, res){
